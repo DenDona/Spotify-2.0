@@ -114,7 +114,7 @@ class StreamMusicAPIView(APIView):
 
 class DeleteView(APIView):
     def post(self, request, pk):
-        musics = Music.object.filter(pk=pk)
+        musics = Music.objects.filter(pk=pk)
         if musics.exists():
             music = musics.first()
             music.delete()
