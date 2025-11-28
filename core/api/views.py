@@ -111,3 +111,12 @@ class StreamMusicAPIView(APIView):
             return response
         except Music.DoesNotExist:
             return Response({'error': 'Track not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class DeleteView(APIView):
+    def post(self, request, pk):
+        musics = Music.object.filter(pk=pk)
+        if musics.exists():
+            music = musics.first()
+            music.delete()
+            return Response({'success': 'Вы успешно удалили песню'}, status=status.HTTP_200_OK)
+        return Response({'error': 'Песни не найдено'})
